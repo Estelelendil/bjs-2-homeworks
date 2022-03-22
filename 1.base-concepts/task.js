@@ -37,20 +37,26 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   let creditSumm = newAmount -newContribution; // cумма/тело кредита
 
-  // let dateCreditEnd = new Date(Date.parse(date));// date изначально строка, date.parse преобразует в секунды, new Date преобразует в дату О_О (но с лишними часами и минутами, хз почему)
-  // dateCreditEnd.setHours(0,0,0,0) // удаляет лишние минуты часы секунды и прочую хрень
-  date.setHours(0, 0, 0, 0);
+  // // let dateCreditEnd = new Date(Date.parse(date));// date изначально строка, date.parse преобразует в секунды, new Date преобразует в дату О_О (но с лишними часами и минутами, хз почему)
+  // // dateCreditEnd.setHours(0,0,0,0) // удаляет лишние минуты часы секунды и прочую хрень
+  // date.setHours(0, 0, 0, 0);
 
-  let dateNow = new Date()// создает текущею дату,но с лишниими часами и минутами
-  dateNow.setHours(0, 0, 0, 0) // удаляет лишние минуты часы секунды и прочую хрень
+  // let dateNow = new Date()// создает текущею дату,но с лишниими часами и минутами
+  // dateNow.setHours(0, 0, 0, 0) // удаляет лишние минуты часы секунды и прочую хрень
 
-  // console.log(dateNow, dateCreditEnd)
+  // // console.log(dateNow, dateCreditEnd)
 
-  let creditPeriod = Math.round((date - dateNow) / 2419200000) - 1;// cрок  в месяцах
+  // let creditPeriod = Math.round((date - dateNow) / 2419200000) - 1;// cрок  в месяцах
+  let currentYear = new Date().getFullYear();
+  let currentMonth = new Date().getMonth();
+
+  let differenceYear = date.getFullYear() - currentYear;
+  let creditPeriod = differenceYear * 12 - currentMonth + date.getMonth();
 
   let interestRate = newPercent / 100 / 12;
   let creditMonthPayment = creditSumm * (interestRate + (interestRate / (((1 +interestRate) ** creditPeriod) - 1)));
   let totalAmount = creditMonthPayment * creditPeriod;
   return Number(totalAmount.toFixed(2));
 }
+
 
