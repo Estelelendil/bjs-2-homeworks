@@ -4,14 +4,14 @@ function solveEquation(a, b, c){
     const d = b ** 2 - 4 * a * c;
 
     if ( d == 0) {
-        let answer = -b / (2 * a);
-        arr.push(answer);
+        
+        arr.push(-b / (2 * a));
     }
     if (d > 0){
-        let answer = (-b + Math.sqrt(d) )/(2*a)
-        arr.push(answer);
-        answer = (-b - Math.sqrt(d) )/(2*a)
-        arr.push(answer);
+        
+        arr.push((-b + Math.sqrt(d) )/(2*a), (-b - Math.sqrt(d) )/(2*a) );
+        
+        
     }
     return arr;
 }
