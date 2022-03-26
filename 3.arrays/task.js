@@ -1,14 +1,14 @@
-// function compareArrays(arr1, arr2) {
-//   function isElement(currentElementArr,){
-// arr1.every()
-//   }
-//   // arr1.every(element) === arr2.every(element)
-//   let result;
+function compareArrays(arr1, arr2) {
+  // function isElement(currentElementArr,){
+    let result = arr1.every(item => item === arr2.every(item => item));
+  
+  // arr1.every(element) === arr2.every(element)
+  
 
-  // Ваш код
+  
 
-//   return result; // boolean
-// }
+  return result; // boolean
+}
 
 function advancedFilter(arr) {
   let resultArr = arr.filter(item => item > 0).filter(item => item % 3 === 0).map(item => item * 10);
