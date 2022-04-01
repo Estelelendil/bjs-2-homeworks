@@ -14,7 +14,7 @@ Student.prototype.setSubject = function (subjectName) {
 
 // --3--4--
 Student.prototype.addMark = function(mark){
-  // debugger;
+ 
   if(this.marks === undefined){ 
     this.marks = [];
     this.marks.push(mark);
@@ -24,7 +24,7 @@ Student.prototype.addMark = function(mark){
 }
 
 Student.prototype.addMarks = function(... mark){
-  // debugger;
+
   if(this.marks === undefined){ 
     this.marks = [];
     this.marks.push(...mark);
@@ -36,7 +36,7 @@ Student.prototype.addMarks = function(... mark){
 
 // --5--
 Student.prototype.getAverage = function(){
-  // debugger
+
   const sum = this.marks.reduce(function(sum, current) {
     return sum + current
   });
