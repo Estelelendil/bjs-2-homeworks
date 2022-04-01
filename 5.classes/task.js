@@ -87,3 +87,34 @@ const picknick = new FantasticBook(
   console.log(picknick.state); //10
   picknick.fix(); // неужели нужно отдельно указывать наследование и для методов тоже?!
   console.log(picknick.state); //15
+
+  // Задача 2
+
+  class Library {
+      constructor(name){
+          this.name = name;
+          this.books = [];
+      }
+      set addBook(book){
+          if(book.state > 30){ //Нужен ли геттер, если не нужно ничего возвращать?
+              this.books.push(book);
+          }
+          else{
+              throw new Error('Книга в слишком плохом состоянии')// могу ли я вернуть из сеттера ошибку?
+          }
+      }
+      set findBookBy(key){ //почему только одно значение?
+           for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
+            if (this.books[i].key){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
+                return 
+                }
+           }
+      }
+      set giveBookByName(bookName){
+        for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
+            if (this.books[i].name == bookName){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
+                return 
+                }
+           }
+      }
+  }
