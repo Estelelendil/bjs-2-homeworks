@@ -28,17 +28,6 @@ class PrintEditionItem {
     }
 }
 
-// const ssherlock = new PrintEditionItem(
-//     "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе",
-//     2019,
-//     1008
-//   );
-  
-//   console.log(ssherlock);
-//   console.log(ssherlock.releaseDate); //2019
-//   console.log(ssherlock.state); //100
-//   ssherlock.fix();
-//   console.log(ssherlock.state); //100
 
   class Magazine extends PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
