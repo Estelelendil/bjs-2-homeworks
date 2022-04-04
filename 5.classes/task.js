@@ -4,27 +4,27 @@ class PrintEditionItem {
         this.name = name;
         this.releaseDate = releaseDate;
         this.pagesCount = pagesCount;
-        this.state = 100;
+        this.state_ = 100;
         this.type = null;
       }
     fix (){
-        this.type = this.type * 1.5;
-        if(this.type > 100){
-            this.type = 100;
+        this.state_ = this.state_ * 1.5;
+        if(this.state_ > 100){
+            this.state_ = 100;
         }
     
     } 
-    set controlState(newState) {
+    set state(newState) {
         if(newState < 0){
-            this.state = 0;
+            this.state_ = 0;
         }
         else if (newState > 100){
-            this.state = 100;
+            this.state_ = 100;
         }
-        else {this.state = newState}
+        else {this.state_ = newState}
     }
-    get controlState() {
-        return this.state;
+    get state() {
+        return this.state_;
     }
 }
 
@@ -71,7 +71,7 @@ class FantasticBook extends Book {
 
 class DetectiveBook extends Book {
     constructor(author,name, releaseDate, pagesCount,) {
-        super(author, name, releaseDate, pagesCoun);  
+        super(author, name, releaseDate, pagesCount);  
         this.type = "detective"; 
         }
 }
@@ -96,7 +96,7 @@ const picknick = new FantasticBook(
           this.name = name;
           this.books = [];
       }
-      set addBook(book){
+       addBook(book){
           if(book.state > 30){ //Нужен ли геттер, если не нужно ничего возвращать?
               this.books.push(book);
           }
@@ -104,19 +104,23 @@ const picknick = new FantasticBook(
               throw new Error('Книга в слишком плохом состоянии')// могу ли я вернуть из сеттера ошибку?
           }
       }
-      set findBookBy(key){ //почему только одно значение?
-           for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
-            if (this.books[i].key){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
-                return 
+      findBookBy(type, value){ 
+           for(let i = 0; i < this.books.length; i++){ 
+            if (this.books[i][type] == value){ 
+                return this.books[i];
                 }
            }
+           return null;
       }
-      set giveBookByName(bookName){
+      giveBookByName(bookName){
         for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
-            if (this.books[i].name == bookName){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
-                return 
+            if (this.books[i].name == bookName){ 
+                let findBook = this.books[i];
+                 this.books.splice(i , 1);
+                return findBook
                 }
            }
+           return null;
       }
   }
 
