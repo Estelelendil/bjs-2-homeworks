@@ -72,44 +72,85 @@ const picknick = new FantasticBook(
     168
   );
   
-  console.log(picknick.author); //"Аркадий и Борис Стругацкие"
-  picknick.state = 10;
-  console.log(picknick.state); //10
-  picknick.fix(); 
-  console.log(picknick.state); //15
 
   // Задача 2
 
-  class Library {
-      constructor(name){
-          this.name = name;
-          this.books = [];
-      }
-       addBook(book){
-          if(book.state > 30){ 
-              this.books.push(book);
-          }
-          else{
-              throw new Error('Книга в слишком плохом состоянии')
-          }
-      }
-      findBookBy(type, value){ 
-           for(let i = 0; i < this.books.length; i++){ 
-            if (this.books[i][type] == value){ 
-                return this.books[i];
-                }
-           }
-           return null;
-      }
-      giveBookByName(bookName){
-        for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
-            if (this.books[i].name == bookName){ 
-                let findBook = this.books[i];
-                 this.books.splice(i , 1);
-                return findBook
-                }
-           }
-           return null;
-      }
-  }
+class Library {
+    constructor(name){
+        this.name = name;
+        this.books = [];
+    }
+    addBook(book){
+        if(book.state > 30){ 
+            this.books.push(book);
+        }
+        else{
+            throw new Error('Книга в слишком плохом состоянии')
+        }
+    }
+    findBookBy(type, value){ 
+        for(let i = 0; i < this.books.length; i++){ 
+        if (this.books[i][type] == value){ 
+            return this.books[i];
+            }
+        }
+        return null;
+    }
+    giveBookByName(bookName){
+    for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
+        if (this.books[i].name == bookName){ 
+            let findBook = this.books[i];
+                this.books.splice(i , 1);
+            return findBook
+            }
+        }
+        return null;
+    }
+}
 
+// ****
+class Student{
+    constructor(name) {
+        this.name = name;
+        this.marks = {};
+    }
+
+    addMark(mark, subject){
+        if(1 >= mark && mark >= 5){
+            console.log('Ошибка, оценка должна быть числом от 1 до 5')
+            return
+        }
+        if(!this.marks[subject]){ 
+            this.marks[subject] = [];
+        } 
+        this.marks[subject].push(mark);
+        }
+
+    getAverageBySubject(subject){
+        if(!this.marks[subject]){
+            return
+        }
+        const sum = this.marks[subject].reduce(function(sum, current) {
+            return sum + current
+    });
+
+        return sum / this.marks[subject].length; 
+    }
+
+    getAverage() {
+        const arrSubjectKeys = Object.keys(this.marks); // массив ключей-предметов в marks
+
+        const averageMarks = arrSubjectKeys.map(subject => this.getAverageBySubject(subject)) // массив ср оценок по каждому предмету
+        const sum = averageMarks.reduce(function(sum, current) {
+            return sum + current
+        });
+
+        return sum / averageMarks.length;
+
+    }
+
+    exclude(reason){
+        this.excluded = reason;
+        delete this.marks
+    }
+}
