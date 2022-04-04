@@ -75,7 +75,7 @@ const picknick = new FantasticBook(
   console.log(picknick.author); //"Аркадий и Борис Стругацкие"
   picknick.state = 10;
   console.log(picknick.state); //10
-  picknick.fix(); // неужели нужно отдельно указывать наследование и для методов тоже?!
+  picknick.fix(); 
   console.log(picknick.state); //15
 
   // Задача 2
@@ -86,11 +86,11 @@ const picknick = new FantasticBook(
           this.books = [];
       }
        addBook(book){
-          if(book.state > 30){ //Нужен ли геттер, если не нужно ничего возвращать?
+          if(book.state > 30){ 
               this.books.push(book);
           }
           else{
-              throw new Error('Книга в слишком плохом состоянии')// могу ли я вернуть из сеттера ошибку?
+              throw new Error('Книга в слишком плохом состоянии')
           }
       }
       findBookBy(type, value){ 
