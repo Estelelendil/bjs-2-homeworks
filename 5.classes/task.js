@@ -114,7 +114,7 @@ class Student{
 
     addMark(mark, subject){
         if(1 <= mark && mark <= 5){
-            console.log('Ошибка, оценка должна быть числом от 1 до 5')
+            console.error('Ошибка, оценка должна быть числом от 1 до 5')
             return
         }
         if(!this.marks[subject]){ 
