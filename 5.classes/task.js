@@ -9,10 +9,7 @@ class PrintEditionItem {
       }
     fix (){
         this.state_ = this.state_ * 1.5;
-        if(this.state_ > 100){
-            this.state_ = 100;
-        }
-    
+       
     } 
     set state(newState) {
         if(newState < 0){
@@ -85,7 +82,7 @@ class Library {
             this.books.push(book);
         }
         else{
-            throw new Error('Книга в слишком плохом состоянии')
+            console.error('Книга в слишком плохом состоянии');
         }
     }
     findBookBy(type, value){ 
@@ -116,7 +113,7 @@ class Student{
     }
 
     addMark(mark, subject){
-        if(1 >= mark && mark >= 5){
+        if(1 <= mark && mark <= 5){
             console.log('Ошибка, оценка должна быть числом от 1 до 5')
             return
         }
