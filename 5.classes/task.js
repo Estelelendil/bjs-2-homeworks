@@ -1,43 +1,30 @@
+
 class PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.pagesCount = pagesCount;
-        this.state = 100;
+        this.state_ = 100;
         this.type = null;
       }
     fix (){
-        this.type = this.type * 1.5;
-        if(this.type > 100){
-            this.type = 100;
-        }
-    
+        this.state = this.state * 1.5;
+       
     } 
-    set controlState(newState) {
+    set state(newState) {
         if(newState < 0){
-            this.state = 0;
+            this.state_ = 0;
         }
         else if (newState > 100){
-            this.state = 100;
+            this.state_ = 100;
         }
-        else {this.state = newState}
+        else {this.state_ = newState}
     }
-    get controlState() {
-        return this.state;
+    get state() {
+        return this.state_;
     }
 }
 
-// const ssherlock = new PrintEditionItem(
-//     "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе",
-//     2019,
-//     1008
-//   );
-  
-//   console.log(ssherlock);
-//   console.log(ssherlock.releaseDate); //2019
-//   console.log(ssherlock.state); //100
-//   ssherlock.fix();
-//   console.log(ssherlock.state); //100
 
   class Magazine extends PrintEditionItem {
     constructor(name, releaseDate, pagesCount) {
@@ -70,7 +57,7 @@ class FantasticBook extends Book {
 
 class DetectiveBook extends Book {
     constructor(author,name, releaseDate, pagesCount,) {
-        super(author, name, releaseDate, pagesCoun);  
+        super(author, name, releaseDate, pagesCount);  
         this.type = "detective"; 
         }
 }
@@ -82,39 +69,85 @@ const picknick = new FantasticBook(
     168
   );
   
-  console.log(picknick.author); //"Аркадий и Борис Стругацкие"
-  picknick.state = 10;
-  console.log(picknick.state); //10
-  picknick.fix(); // неужели нужно отдельно указывать наследование и для методов тоже?!
-  console.log(picknick.state); //15
 
   // Задача 2
 
-  class Library {
-      constructor(name){
-          this.name = name;
-          this.books = [];
-      }
-      set addBook(book){
-          if(book.state > 30){ //Нужен ли геттер, если не нужно ничего возвращать?
-              this.books.push(book);
-          }
-          else{
-              throw new Error('Книга в слишком плохом состоянии')// могу ли я вернуть из сеттера ошибку?
-          }
-      }
-      set findBookBy(key){ //почему только одно значение?
-           for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
-            if (this.books[i].key){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
-                return 
-                }
-           }
-      }
-      set giveBookByName(bookName){
-        for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
-            if (this.books[i].name == bookName){ // и что мне ее в отдельную переменную сохранять теперь? чтобы потом вернуть через геттер?
-                return 
-                }
-           }
-      }
-  }
+class Library {
+    constructor(name){
+        this.name = name;
+        this.books = [];
+    }
+    addBook(book){
+        if(book.state > 30){ 
+            this.books.push(book);
+        }
+        else{
+            console.error('Книга в слишком плохом состоянии');
+        }
+    }
+    findBookBy(type, value){ 
+        for(let i = 0; i < this.books.length; i++){ 
+        if (this.books[i][type] == value){ 
+            return this.books[i];
+            }
+        }
+        return null;
+    }
+    giveBookByName(bookName){
+    for(let i = 0; i < this.books.length; i++){ //(let value of this.books)
+        if (this.books[i].name == bookName){ 
+            let findBook = this.books[i];
+                this.books.splice(i , 1);
+            return findBook
+            }
+        }
+        return null;
+    }
+}
+
+// ****
+class Student{
+    constructor(name) {
+        this.name = name;
+        this.marks = {};
+    }
+
+    addMark(mark, subject){
+        if(mark < 1 || mark > 5){
+            console.error('Ошибка, оценка должна быть числом от 1 до 5')
+            return
+        }
+        if(!this.marks[subject]){ 
+            this.marks[subject] = [];
+        } 
+        this.marks[subject].push(mark);
+        }
+
+    getAverageBySubject(subject){
+        if(!this.marks[subject]){
+            return
+        }
+        const sum = this.marks[subject].reduce(function(sum, current) {
+            return sum + current
+    });
+
+        return sum / this.marks[subject].length; 
+    }
+
+    getAverage() {
+        const arrSubjectKeys = Object.keys(this.marks); // массив ключей-предметов в marks
+
+        const averageMarks = arrSubjectKeys.map(subject => this.getAverageBySubject(subject)) // массив ср оценок по каждому предмету
+        const sum = averageMarks.reduce(function(sum, current) {
+            return sum + current
+        });
+
+        return sum / averageMarks.length;
+
+    }
+
+    exclude(reason){
+        this.excluded = reason;
+        delete this.marks
+    }
+}

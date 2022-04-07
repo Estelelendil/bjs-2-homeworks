@@ -14,23 +14,18 @@ Student.prototype.setSubject = function (subjectName) {
 
 // --3--4--
 Student.prototype.addMark = function(mark){
- 
-  if(this.marks === undefined){ 
+  if(!this.marks){ 
     this.marks = [];
-    this.marks.push(mark);
-    } else {
-      this.marks.push(mark);
-    }
+  } 
+  this.marks.push(mark);
+    
 }
 
 Student.prototype.addMarks = function(... mark){
-
-  if(this.marks === undefined){ 
+  if(!this.marks){ 
     this.marks = [];
-    this.marks.push(...mark);
-    } else {
-      this.marks.push(...mark);
-    }
+  } 
+  this.marks.push(...mark);   
 }
 
 
