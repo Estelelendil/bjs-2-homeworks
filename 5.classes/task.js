@@ -8,7 +8,7 @@ class PrintEditionItem {
         this.type = null;
       }
     fix (){
-        this.state_ = this.state_ * 1.5;
+        this.state = this.state * 1.5;
        
     } 
     set state(newState) {
@@ -113,7 +113,7 @@ class Student{
     }
 
     addMark(mark, subject){
-        if(1 <= mark && mark <= 5){
+        if((mark <= 1 || mark >= 5)){
             console.error('Ошибка, оценка должна быть числом от 1 до 5')
             return
         }
