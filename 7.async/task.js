@@ -7,8 +7,8 @@ class Clock{
 }
 class AlarmClock{
     constructor(){
-        this.alarmCollection = []; // здесь будут храниться объекты звонки
-        this.timerId = null; //здесь не понятно что
+        this.alarmCollection = []; 
+        this.timerId = null;
     }
     
     addClock(date,func,id){
@@ -20,18 +20,11 @@ class AlarmClock{
                 return console.error('error text')
             }
         }
-        // if(this.alarmCollection.some((item,) => item == id)){
-        //     return console.error('error text')
-        // }
         let clock = new Clock(date,func,id)
         this.alarmCollection.push(clock)
-        // this.timerId.push(id) //вообще не факт
     }
     
     removeClock(id){
-        // if(this.timerId.some((item) => item == id)) {
-        //     this.timerId.splice
-        // this.timerId = this.timerId.filter((item) => item == !id)// как проверить произошлоэто или нет?
         const lenght = this.alarmCollection.length;
         this.alarmCollection = this.alarmCollection.filter((item) => item.id !== id)
         return this.alarmCollection.length !== lenght;
@@ -47,12 +40,12 @@ class AlarmClock{
     start(){
         this.timerId = setInterval(findClock,1000)
         function findClock(){
-            if(this.alarmCollection.length == 0){ //кажется потерян контекст
+            if(this.alarmCollection.length == 0){ 
                 throw new Error('Звонков не обнаружено')
             }
             for(let i=0; i < this.alarmCollection.length; i++){
                 checkClock(alarmCollection[i])// Передаю конкретный объект
-            }//для этого класса ножно в массиве перебрать все ключи даты с проверкой на соответствие по функции чек
+            }
         }
         function checkClock(clock){// получает объект
             if(clock.date == getCurrentFormattedTime()){ //проверяет дату объекта
@@ -61,15 +54,17 @@ class AlarmClock{
         }
     }
 
-        stop() {
-            if(this.timerId){
-                clearInterval(this.timerId)
-                this.timerId = null;}
-            }
+    stop() {
+        if(this.timerId){
+            clearInterval(this.timerId)
+            this.timerId = null;
+        }
+    }
     
     printAlarms(){
         this.alarmCollection.forEach((item) => console.log(item.id, item.time))
     }
+
     clearAlarms(){
         stop();
         this.alarmCollection.forEach((item,index,arr) => arr.splice(0,arr.length))
@@ -78,12 +73,10 @@ class AlarmClock{
 
 function testcase(){
     let clockTimer = new AlarmClock
-
-
-clockTimer.addClock("16:45", f => console.log('Работает'), 1) // Функция дб вызвана несколько раз?
-clockTimer.addClock("16:45", f => f, 1);
-clockTimer.addClock("16:45", f => f, 2);
-clockTimer.addClock("16:45", f => f, 3);
-clockTimer.clearAlarms()
-console.log(clockTimer)
+    clockTimer.addClock("16:45", f => console.log('Работает'), 1) 
+    clockTimer.addClock("16:45", f => f, 1);
+    clockTimer.addClock("16:45", f => f, 2);
+    clockTimer.addClock("16:45", f => f, 3);
+    clockTimer.clearAlarms()
+    console.log(clockTimer)
 }
