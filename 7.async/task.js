@@ -38,8 +38,10 @@ class AlarmClock{
     }  
 
     getCurrentFormattedTime(){
-        let date = new Date;
-        return `${date.getHours()}:${date.getMinutes()}`
+        const currentDate = new Date();
+        const hours = currentDate.getHours() < 10 ? `0${currentDate.getHours()}` : `${currentDate.getHours()}`;
+        const minutes = currentDate.getMinutes() < 10 ? `0${currentDate.getMinutes()}` : `${currentDate.getMinutes()}`;
+        return `${hours}:${minutes}`
     }
 
     start(){
@@ -70,7 +72,7 @@ class AlarmClock{
     }
     clearAlarms(){
         stop();
-        this.alarmCollection.forEach((item, index, arr) => arr.pop)
+        this.alarmCollection.forEach((item,index,arr) => arr.splice(0,arr.length))
     }
 } 
 
