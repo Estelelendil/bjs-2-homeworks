@@ -1,7 +1,7 @@
 class Clock{
     constructor (date,func,id) {
-        this.date = date;
-        this.func = func;
+        this.time = date;
+        this.cullback = func;
         this.id = id;
     }
 }
@@ -45,7 +45,7 @@ class AlarmClock{
     start(){
         this.timerId = setInterval(findClock,1000)
         function findClock(){
-            if(this.addClock.lenght == 0){
+            if(this.alarmCollection.length == 0){ //кажется потерян контекст
                 throw new Error('Звонков не обнаружено')
             }
             for(let i=0; i < this.alarmCollection.length; i++){
@@ -54,20 +54,34 @@ class AlarmClock{
         }
         function checkClock(clock){// получает объект
             if(clock.date == getCurrentFormattedTime()){ //проверяет дату объекта
-                clock.func() // запускает функцию объекта
+                clock.cullback() // запускает функцию объекта
             }
         }
+    }
 
-        stop() 
-            {
+        stop() {
             if(this.timerId){
                 clearInterval(this.timerId)
                 this.timerId = null;}
-            
-        }
+            }
+    
+    printAlarms(){
+        this.alarmCollection.forEach((item) => console.log(item.id, item.time))
+    }
+    clearAlarms(){
+        stop();
+        this.alarmCollection.forEach((item, index, arr) => arr.pop)
     }
 } 
-let clockTimer = new AlarmClock
-console.log(clockTimer.alarmCollection.length)
-clockTimer.addClock("16:45", f => f, 1)
-// console.log(clockTimer)
+
+function testcase(){
+    let clockTimer = new AlarmClock
+
+
+clockTimer.addClock("16:45", f => console.log('Работает'), 1) // Функция дб вызвана несколько раз?
+clockTimer.addClock("16:45", f => f, 1);
+clockTimer.addClock("16:45", f => f, 2);
+clockTimer.addClock("16:45", f => f, 3);
+clockTimer.clearAlarms()
+console.log(clockTimer)
+}
