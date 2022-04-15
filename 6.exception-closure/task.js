@@ -3,12 +3,13 @@ function parseCount(parsObject){
   if (isNaN(parseValue)){
     throw new Error("Невалидное значение");
   }
-  try {
-        return parseValue
-      }
-  catch(e){
-     console.error(e);
-  }   
+  return parseValue
+  // try {
+  //       return parseValue
+  //     }
+  // catch(e){
+  //    console.error(e);
+  // }   
 }
 // console.log(parseCount("ыфва"))
 
@@ -51,7 +52,16 @@ function getTriangle(a,b,c){
     return triangle = new Triangle(a,b,c)
   }
   catch(e){ 
-    return "Ошибка! Треугольник не существует"
+    triangle = "Ошибка! Треугольник не существует"
+    triangle.getArea = function(){
+      return "Ошибка! Треугольник не существует"
+    };
+    triangle.getPerimeter = function (){
+      return "Ошибка! Треугольник не существует"
+    }
+    return triangle
   }
 }
-// console.log(getTriangle(1,3,100))
+let tri = getTriangle(1,3,100)
+console.log(tri)
+console.log(tri.getArea)
