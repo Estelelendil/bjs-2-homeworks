@@ -1,7 +1,7 @@
 class Clock{
     constructor (date,func,id) {
         this.time = date;
-        this.cullback = func;
+        this.callback = func;
         this.id = id;
     }
 }
@@ -39,17 +39,17 @@ class AlarmClock{
 
     start(){
         this.timerId = setInterval(findClock,1000)
-        function findClock(){
+        let findClock = () => {
             if(this.alarmCollection.length == 0){ 
                 throw new Error('Звонков не обнаружено')
             }
             for(let i=0; i < this.alarmCollection.length; i++){
-                checkClock(alarmCollection[i])// Передаю конкретный объект
+                checkClock(this.alarmCollection[i])// Передаю конкретный объект
             }
         }
-        function checkClock(clock){// получает объект
+        let checkClock = (clock) => { // получает объект
             if(clock.date == getCurrentFormattedTime()){ //проверяет дату объекта
-                clock.cullback() // запускает функцию объекта
+                clock.callback() // запускает функцию объекта
             }
         }
     }
