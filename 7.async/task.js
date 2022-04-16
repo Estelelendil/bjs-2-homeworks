@@ -48,7 +48,7 @@ class AlarmClock{
             }
         }
         let checkClock = (clock) => { // получает объект
-            if(clock.date == getCurrentFormattedTime()){ //проверяет дату объекта
+            if(clock.date == this.getCurrentFormattedTime()){ //проверяет дату объекта
                 clock.callback() // запускает функцию объекта
             }
         }
@@ -66,7 +66,7 @@ class AlarmClock{
     }
 
     clearAlarms(){
-        stop();
+        this.stop();
         this.alarmCollection.forEach((item,index,arr) => arr.splice(0,arr.length))
     }
 } 
